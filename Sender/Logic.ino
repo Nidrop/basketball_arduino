@@ -4,11 +4,21 @@ void buttons_handler(){
   if (buttonAttack14.isClick()){
     data_send.attack_timer = 14100; //+100 т.к. сразу после нажатия идет отнятие
     data_send.system_state = (data_send.system_state | STATE_ATTACK_ON) & (~STATE_ATTACK_PAUSE);
+    
+    //отправка запроса на снятие паузы компьютеру
+    if((data_send.system_state & STATE_TIMER_PAUSE) == STATE_TIMER_PAUSE){
+      Serial.write(data_send.system_state & (~STATE_TIMER_PAUSE));
+    }
     //Serial.println(data_send.attack_timer);
   }
   if (buttonAttack24.isClick()){
     data_send.attack_timer = 24100; //+100 т.к. сразу после нажатия идет отнятие
     data_send.system_state = (data_send.system_state | STATE_ATTACK_ON) & (~STATE_ATTACK_PAUSE);
+    
+    //отправка запроса на снятие паузы компьютеру
+    if((data_send.system_state & STATE_TIMER_PAUSE) == STATE_TIMER_PAUSE){
+      Serial.write(data_send.system_state & (~STATE_TIMER_PAUSE));
+    }
     //Serial.println(data_send.attack_timer);
   }
   if (buttonAttack14.isHold()){
@@ -24,6 +34,11 @@ void buttons_handler(){
   if (buttonAttackPause.isClick()){
     if((data_send.system_state & STATE_ATTACK_ON) == STATE_ATTACK_ON){
       data_send.system_state = data_send.system_state ^ STATE_ATTACK_PAUSE;
+      
+      //отправка запроса на снятие паузы компьютеру
+      if((data_send.system_state & STATE_TIMER_PAUSE) == STATE_TIMER_PAUSE){
+        Serial.write(data_send.system_state & (~STATE_TIMER_PAUSE));
+      }
     }
   }
   if (buttonAttackHide.isClick()){
