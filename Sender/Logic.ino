@@ -61,12 +61,14 @@ void state_check(uint16_t t){
       data_send.system_state = data_send.system_state | STATE_ATTACK_PAUSE;
       data_send.system_state = data_send.system_state | STATE_ONE_SEC_AFTER_ATTACK;
       firstSecondAfterAttackTimer = millis();
+      tone(TONE_PIN, 250);
     }
   }
 
   if((data_send.system_state & STATE_ONE_SEC_AFTER_ATTACK) == STATE_ONE_SEC_AFTER_ATTACK){
     if(millis() - firstSecondAfterAttackTimer >= 1000){
       data_send.system_state = data_send.system_state & (~STATE_ONE_SEC_AFTER_ATTACK);
+      noTone(TONE_PIN);
     }
   }
 
