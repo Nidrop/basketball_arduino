@@ -3,22 +3,22 @@ bool noToneIsSet = true;
 void buttons_handler(){
   if (buttonAttack14.isClick()){
     data_send.attack_timer = 14100; //+100 т.к. сразу после нажатия идет отнятие
-    data_send.system_state = data_send.system_state & (~STATE_ATTACK_PAUSE);
+    data_send.system_state = (data_send.system_state | STATE_ATTACK_ON) & (~STATE_ATTACK_PAUSE);
     //Serial.println(data_send.attack_timer);
   }
   if (buttonAttack24.isClick()){
     data_send.attack_timer = 24100; //+100 т.к. сразу после нажатия идет отнятие
-    data_send.system_state = data_send.system_state & (~STATE_ATTACK_PAUSE);
+    data_send.system_state = (data_send.system_state | STATE_ATTACK_ON) & (~STATE_ATTACK_PAUSE);
     //Serial.println(data_send.attack_timer);
   }
   if (buttonAttack14.isHold()){
     data_send.attack_timer = 14000;
-    data_send.system_state = data_send.system_state | STATE_ATTACK_PAUSE;
+    data_send.system_state = data_send.system_state | STATE_ATTACK_ON | STATE_ATTACK_PAUSE;
     //Serial.println(data_send.attack_timer);
   }
   if (buttonAttack24.isHold()){
     data_send.attack_timer = 24000;
-    data_send.system_state = data_send.system_state | STATE_ATTACK_PAUSE;
+    data_send.system_state = data_send.system_state | STATE_ATTACK_ON | STATE_ATTACK_PAUSE;
     //Serial.println(data_send.attack_timer);
   }
   if (buttonAttackPause.isClick()){
@@ -27,6 +27,7 @@ void buttons_handler(){
     }
   }
   if (buttonAttackHide.isClick()){
+    data_send.attack_timer = 0;
     data_send.system_state = data_send.system_state ^ STATE_ATTACK_ON;
     data_send.system_state = data_send.system_state | STATE_ATTACK_PAUSE;
   }
