@@ -89,15 +89,9 @@ void state_check(uint16_t t){
   }
 
   bool oneSecAfterPeriod = (data_send.system_state & STATE_ONE_SEC_AFTER_PERIOD) == STATE_ONE_SEC_AFTER_PERIOD;
-  bool oneSecAfter5SecLeftPeriod = (data_send.system_state & STATE_ONE_SEC_AFTER_5_SEC_LEFT_PERIOD) == STATE_ONE_SEC_AFTER_5_SEC_LEFT_PERIOD;
-  if(oneSecAfterPeriod || oneSecAfter5SecLeftPeriod)
+  if(oneSecAfterPeriod)
   {
-    if(oneSecAfterPeriod){
-      tone(TONE_PIN, 250);
-    }
-    if(oneSecAfter5SecLeftPeriod){
-      tone(TONE_PIN, 300);
-    }
+    tone(TONE_PIN, 250);
     noToneIsSet = false;
   }
   else
