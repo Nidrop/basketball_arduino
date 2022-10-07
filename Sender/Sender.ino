@@ -25,7 +25,7 @@
 #define STATE_ATTACK_PAUSE          0b00010000
 #define STATE_ONE_SEC_AFTER_PERIOD  0b00100000
 #define STATE_ONE_SEC_AFTER_ATTACK  0b01000000
-#define STATE_ONE_SEC_AFTER_5_SEC_LEFT_PERIOD  0b10000000
+#define STATE_ONE_SEC_AFTER_TIMEOUT 0b10000000
 
 // отправка данных по однопроводному юарту
 #include "softUART.h"
